@@ -1,4 +1,4 @@
-package com.rocketseat.nlw.nearby.ui.theme
+package com.clasenmateus.nlw.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

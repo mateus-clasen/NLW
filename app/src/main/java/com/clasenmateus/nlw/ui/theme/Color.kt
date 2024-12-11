@@ -1,4 +1,4 @@
-package com.rocketseat.nlw.nearby.ui.theme
+package com.clasenmateus.nlw.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
