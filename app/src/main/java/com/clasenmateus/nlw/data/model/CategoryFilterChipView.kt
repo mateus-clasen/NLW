@@ -6,7 +6,7 @@ import com.clasenmateus.nlw.R
 /**
  * Created by Mateus H. Clasen on 11/12/2024.
  */
-enum class NearbyCategoryFilterChipView(
+enum class CategoryFilterChipView(
     val description: String,
     @DrawableRes val icon: Int
 
@@ -22,7 +22,7 @@ enum class NearbyCategoryFilterChipView(
     PADARIA(description = "Padaria", icon = R.drawable.ic_bakery);
 
     companion object {
-        fun fromDescription(description: String): NearbyCategoryFilterChipView? {
+        fun fromDescription(description: String): CategoryFilterChipView? {
             return entries.find { it.description == description }
         }
     }

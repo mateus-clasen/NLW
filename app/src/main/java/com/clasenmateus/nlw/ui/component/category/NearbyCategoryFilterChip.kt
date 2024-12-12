@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.clasenmateus.nlw.data.model.NearbyCategory
-import com.clasenmateus.nlw.data.model.NearbyCategoryFilterChipView
+import com.clasenmateus.nlw.data.model.Category
+import com.clasenmateus.nlw.data.model.CategoryFilterChipView
 import com.clasenmateus.nlw.ui.theme.Gray300
 import com.clasenmateus.nlw.ui.theme.Gray400
 import com.clasenmateus.nlw.ui.theme.GreenBase
@@ -27,7 +27,7 @@ import com.clasenmateus.nlw.ui.theme.Typography
 @Composable
 fun NearbyCategoryFilterChip(
     modifier: Modifier = Modifier,
-    category: NearbyCategory,
+    category: Category,
     isSelected: Boolean,
     onClick: (isSelect: Boolean) -> Unit
 ) {
@@ -75,9 +75,9 @@ fun NearbyCategoryFilterChip(
 @Composable
 private fun NearbyCategoryFilterChipPreview() {
     NearbyCategoryFilterChip(
-        category = NearbyCategory(
+        category = Category(
             id = "1",
-            name = NearbyCategoryFilterChipView.ALIMENTACAO.description
+            name = CategoryFilterChipView.ALIMENTACAO.description
         ),
         isSelected = true,
         onClick = {}
@@ -88,7 +88,7 @@ private fun NearbyCategoryFilterChipPreview() {
 @Composable
 private fun NearbyCategoryFilterChipNotSelectedPreview() {
     NearbyCategoryFilterChip(
-        category = NearbyCategory(
+        category = Category(
             id = "1",
             name = "Cinema"
         ),
