@@ -19,14 +19,13 @@ import com.clasenmateus.nlw.ui.theme.Typography
 /**
  * Created by Mateus H. Clasen on 12/12/2024.
  */
-
 @Composable
-fun MarketDetailsRules(modifier: Modifier = Modifier, market: Market) {
+fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier, market: Market) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(text = "Regulamento", style = Typography.headlineSmall, color = Gray400)
+        Text(text = "Informações", style = Typography.headlineSmall, color = Gray400)
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -81,4 +80,5 @@ fun MarketDetailsRules(modifier: Modifier = Modifier, market: Market) {
 
         }
     }
+
 }
