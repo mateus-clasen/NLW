@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.clasenmateus.nlw"
+    namespace = "com.clasenmateus.nearby"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.clasenmateus.nlw"
+        applicationId = "com.clasenmateus.nearby"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -52,6 +52,7 @@ android {
 
 dependencies {
 
+    implementation(libs.maps.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
