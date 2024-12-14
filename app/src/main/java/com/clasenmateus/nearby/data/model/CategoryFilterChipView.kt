@@ -2,10 +2,15 @@ package com.clasenmateus.nearby.data.model
 
 import androidx.annotation.DrawableRes
 import com.clasenmateus.nearby.R
+import kotlinx.serialization.Serializable
 
 /**
  * Created by Mateus H. Clasen on 11/12/2024.
+ *
+ *
  */
+
+@Serializable
 enum class CategoryFilterChipView(
     val description: String,
     @DrawableRes val icon: Int
