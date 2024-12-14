@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.clasenmateus.nearby.R
 import com.clasenmateus.nearby.data.model.Market
 import com.clasenmateus.nearby.ui.component.button.NearbyButton
 import com.clasenmateus.nearby.ui.component.market_details.NearbyMarketDetailsCoupons
@@ -33,7 +34,7 @@ import com.clasenmateus.nearby.ui.theme.Typography
  * Created by Mateus H. Clasen on 13/12/2024.
  */
 @Composable
-fun MarketDetailsScreen(modifier: Modifier = Modifier, market: Market) {
+fun MarketDetailsScreen(modifier: Modifier = Modifier, market: Market, onNavigateBack : () -> Unit = {}) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -97,5 +98,15 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, market: Market) {
                 )
             }
         }
+        NearbyButton(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(24.dp),
+            iconRes = R.drawable.ic_arrow_left,
+            text = "Voltar",
+            onClick = {
+                onNavigateBack()
+            }
+        )
     }
 }

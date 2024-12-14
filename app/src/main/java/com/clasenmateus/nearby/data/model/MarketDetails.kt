@@ -3,15 +3,15 @@ package com.clasenmateus.nearby.data.model
 import kotlinx.serialization.Serializable
 
 /**
- * Created by Mateus H. Clasen on 12/12/2024.
+ * Created by Mateus H. Clasen on 14/12/2024.
  */
-
 @Serializable
-data class Market (
+data class MarketDetails(
     val id: String,
     val categoryId: String,
     val name: String,
     val description: String,
+    val rules: List<Rule>,
     val coupons: Int,
     val latitude: Double,
     val longitude: Double,

@@ -22,7 +22,7 @@ import com.clasenmateus.nearby.ui.component.welcome.WelcomeHeader
  */
 
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(modifier: Modifier = Modifier, onNavigateToHome: () -> Unit) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -36,14 +36,8 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
         NearbyButton(
             modifier = Modifier.fillMaxWidth(),
             text = "Começar",
-            onClick = { /*TODO*/ }
+            onClick = onNavigateToHome
+
         )
     }
-}
-
-
-@Preview
-@Composable
-private fun WelcomeScreenPreview() {
-    WelcomeScreen()
 }
