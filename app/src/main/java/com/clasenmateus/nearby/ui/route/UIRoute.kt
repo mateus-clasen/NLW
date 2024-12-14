@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.screen.route
+package com.clasenmateus.nearby.ui.route
 
 import kotlinx.serialization.Serializable
 

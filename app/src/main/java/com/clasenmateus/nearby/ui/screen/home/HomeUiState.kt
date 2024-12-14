@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.screen
+package com.clasenmateus.nearby.ui.screen.home
 
 import com.clasenmateus.nearby.data.model.Category
 import com.clasenmateus.nearby.data.model.Market

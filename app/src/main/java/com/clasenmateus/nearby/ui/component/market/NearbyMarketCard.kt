@@ -27,6 +27,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.ImageLoader
+import coil3.compose.AsyncImage
 import com.clasenmateus.nearby.data.model.Market
 import com.clasenmateus.nearby.ui.theme.Gray100
 import com.clasenmateus.nearby.ui.theme.Gray200
@@ -61,15 +63,15 @@ fun NearbyMarketCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Image(
+            AsyncImage(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp))
                     .fillMaxWidth(0.3f)
                     .height(IntrinsicSize.Min)
                     .aspectRatio(1f, matchHeightConstraintsFirst = true),
                 contentScale = ContentScale.Crop,
-                painter = painterResource(R.drawable.img_coffee),
-                contentDescription = "Imagem da Cafeteria"
+                model = market.cover,
+                contentDescription = "Imagem do Estabelecimento"
             )
             Column {
                 Text(text = market.name, style = Typography.headlineSmall.copy(fontSize = 14.sp))
@@ -101,28 +103,4 @@ fun NearbyMarketCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun NearbyMarketCardPreview() {
-    NearbyMarketCard(
-        modifier = Modifier.fillMaxWidth(),
-        market = Market(
-            id = "012576ea-4441-4b8a-89e5-d5f32104c7c4",
-            categoryId = "146b1a88-b3d3-4232-8b8f-c1f006f1e86d",
-            name = "Sabor Grill",
-            description = "Churrascaria com cortes nobres e buffet variado. Experiência completa para os amantes de carne.",
-            coupons = 10,
-            rules = emptyList(),
-            latitude = -23.55974230991911,
-            longitude = -46.65814845249887,
-            address = "Av. Paulista - Bela Vista",
-            phone = "(11) 94567-1212",
-            cover = "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=400&h=300"
-        )
-    ) {
-
-    }
-
 }

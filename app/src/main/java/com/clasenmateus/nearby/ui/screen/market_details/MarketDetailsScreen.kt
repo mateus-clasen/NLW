@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.screen
+package com.clasenmateus.nearby.ui.screen.market_details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,7 +27,6 @@ import com.clasenmateus.nearby.data.model.Market
 import com.clasenmateus.nearby.ui.component.button.NearbyButton
 import com.clasenmateus.nearby.ui.component.market_details.NearbyMarketDetailsCoupons
 import com.clasenmateus.nearby.ui.component.market_details.NearbyMarketDetailsInfos
-import com.clasenmateus.nearby.ui.component.market_details.NearbyMarketDetailsRules
 import com.clasenmateus.nearby.ui.theme.Typography
 
 /**
@@ -76,14 +75,14 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, market: Market, onNavigat
                             .padding(vertical = 24.dp)
                             .fillMaxWidth()
                     )
-                    if (market.rules.isNotEmpty()) {
-                        NearbyMarketDetailsRules(rules = market.rules)
-                        HorizontalDivider(
-                            modifier = Modifier
-                                .padding(vertical = 24.dp)
-                                .fillMaxWidth()
-                        )
-                    }
+//                    if (market.rules.isNotEmpty()) {
+//                        NearbyMarketDetailsRules(rules = market.rules)
+//                        HorizontalDivider(
+//                            modifier = Modifier
+//                                .padding(vertical = 24.dp)
+//                                .fillMaxWidth()
+//                        )
+//                    }
                     NearbyMarketDetailsCoupons(
                         coupons = listOf()
                     )
@@ -103,7 +102,6 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, market: Market, onNavigat
                 .align(Alignment.TopStart)
                 .padding(24.dp),
             iconRes = R.drawable.ic_arrow_left,
-            text = "Voltar",
             onClick = {
                 onNavigateBack()
             }

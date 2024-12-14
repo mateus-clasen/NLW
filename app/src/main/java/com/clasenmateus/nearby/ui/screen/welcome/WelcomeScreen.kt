@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.screen
+package com.clasenmateus.nearby.ui.screen.welcome
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +11,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.clasenmateus.nearby.ui.component.button.NearbyButton
 import com.clasenmateus.nearby.ui.component.welcome.WelcomeBody

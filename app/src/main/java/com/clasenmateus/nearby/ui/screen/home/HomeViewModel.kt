@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.screen
+package com.clasenmateus.nearby.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,14 @@ class HomeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-    fun fetchCategories() {
+    fun onEvent(event: HomeUiEvent) {
+        when (event) {
+            HomeUiEvent.OnFetchCategories -> fetchCategories()
+            is HomeUiEvent.OnFetchMarkets -> fetchMarkets(categoryId = event.categoryId)
+        }
+    }
+
+    private fun fetchCategories() {
         viewModelScope.launch {
             _uiState.update { currentUiState ->
                 NearbyRemoteDataSource.getCategories().fold(
@@ -34,7 +41,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun fetchMarkets(categoryId: String) {
+    private fun fetchMarkets(categoryId: String) {
         viewModelScope.launch {
             _uiState.update { currentUiState ->
                 NearbyRemoteDataSource.getMarkets(categoryId = categoryId).fold(
