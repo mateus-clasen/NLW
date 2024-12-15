@@ -29,16 +29,23 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
 import kotlin.math.roundToInt
 
+
 /**
  * Created by Mateus H. Clasen on 15/12/2024.
  */
 @Composable
 fun NearbyGoogleMap(modifier: Modifier = Modifier, uiState: HomeUiState) {
+
+    val mockUserLocation = LatLng(
+        -23.561187293883442,
+        -46.656451388116494
+    )
+
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(), 13f)
+        position = CameraPosition.fromLatLngZoom(mockUserLocation, 13f)
     }
     val uiSettings by remember {
         mutableStateOf(MapUiSettings(zoomControlsEnabled = true))
@@ -50,7 +57,7 @@ fun NearbyGoogleMap(modifier: Modifier = Modifier, uiState: HomeUiState) {
     ) {
         context.getDrawable(R.drawable.ic_user_location)?.let { drawable ->
             Marker(
-                state = MarkerState(position =),
+                state = MarkerState(position = mockUserLocation),
                 icon = BitmapDescriptorFactory.fromBitmap(
                     drawable.toBitmap(
                         width = density.run { 72.dp.toPx() }.roundToInt(),
@@ -77,7 +84,7 @@ fun NearbyGoogleMap(modifier: Modifier = Modifier, uiState: HomeUiState) {
                     )
                 }.also {
                     coroutineScope.launch {
-                        val allMarks = uiState.marketLocation?.plus()
+                        val allMarks = uiState.marketLocation?.plus(mockUserLocation)
                         val southwestPoint =
                             findSouthwestPoint(points = allMarks.orEmpty())
                         val northeastPoint =
