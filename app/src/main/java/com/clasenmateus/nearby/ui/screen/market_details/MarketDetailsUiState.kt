@@ -7,5 +7,5 @@ import com.clasenmateus.nearby.data.model.Rule
  */
 data class MarketDetailsUiState(
     val rules: List<Rule>? = null,
-    val coupons: String? = null
+    val coupon: String? = null
 )
