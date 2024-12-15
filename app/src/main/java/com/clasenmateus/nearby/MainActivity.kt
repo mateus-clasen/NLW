@@ -5,28 +5,25 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.clasenmateus.nearby.data.model.Market
-import com.clasenmateus.nearby.ui.screen.home.HomeScreen
-import com.clasenmateus.nearby.ui.screen.home.HomeViewModel
-import com.clasenmateus.nearby.ui.screen.market_details.MarketDetailsScreen
-import com.clasenmateus.nearby.ui.screen.splash.SplashScreen
-import com.clasenmateus.nearby.ui.screen.welcome.WelcomeScreen
 import com.clasenmateus.nearby.ui.route.Home
 import com.clasenmateus.nearby.ui.route.QRCodeScanner
 import com.clasenmateus.nearby.ui.route.Splash
 import com.clasenmateus.nearby.ui.route.Welcome
+import com.clasenmateus.nearby.ui.screen.home.HomeScreen
+import com.clasenmateus.nearby.ui.screen.home.HomeViewModel
+import com.clasenmateus.nearby.ui.screen.market_details.MarketDetailsScreen
 import com.clasenmateus.nearby.ui.screen.market_details.MarketDetailsUiEvent
 import com.clasenmateus.nearby.ui.screen.market_details.MarketDetailsViewModel
 import com.clasenmateus.nearby.ui.screen.qrcode_scanner.QRCodeScannerScreen
+import com.clasenmateus.nearby.ui.screen.splash.SplashScreen
+import com.clasenmateus.nearby.ui.screen.welcome.WelcomeScreen
 import com.clasenmateus.nearby.ui.theme.NearbyTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = Splash
                 ) {
                     composable<Splash> {
-                        SplashScreen(modifier = Modifier.fillMaxSize(),
+                        SplashScreen(
                             onNavigateToWelcome = {
                                 navController.navigate(Welcome)
                             }
@@ -86,16 +83,18 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+
                     composable<QRCodeScanner> {
                         QRCodeScannerScreen(
                             onCompletedScan = { qrCodeContent ->
-                                if (qrCodeContent.isNotEmpty())
+                                if (qrCodeContent.isNotEmpty()) {
                                     marketDetailsViewModel.onEvent(
                                         MarketDetailsUiEvent.OnFetchCoupon(
-                                            qrCodeContent = qrCodeContent
+                                            qrCodeContent
                                         )
                                     )
-                                navController.popBackStack()
+                                    navController.popBackStack()
+                                }
                             }
                         )
                     }

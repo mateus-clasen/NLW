@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.clasenmateus.nearby.data.model.Market
 import com.clasenmateus.nearby.ui.component.category.NearbyCategoryFilterChipList
-import com.clasenmateus.nearby.ui.component.home.NearbyGoogleMap
 import com.clasenmateus.nearby.ui.component.market.NearbyMarketCardList
 import com.clasenmateus.nearby.ui.theme.Gray100
+import com.rocketseat.nlw.nearby.ui.component.home.NearbyGoogleMap
 
 /**
  * Created by Mateus H. Clasen on 12/12/2024.

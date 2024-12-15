@@ -30,7 +30,7 @@ class MarketDetailsViewModel : ViewModel() {
                 .onSuccess { coupon ->
                     _uiState.update { currentUiState ->
                         currentUiState.copy(
-                            coupons = coupon.coupon
+                            coupon = coupon.coupon
                         )
                     }
 
@@ -38,7 +38,7 @@ class MarketDetailsViewModel : ViewModel() {
                 .onFailure {
                     _uiState.update { currentUiState ->
                         currentUiState.copy(
-                            coupons = ""
+                            coupon = ""
                         )
 
                     }
@@ -71,7 +71,7 @@ class MarketDetailsViewModel : ViewModel() {
     private fun resetCoupon() {
         _uiState.update { currentUiState ->
             currentUiState.copy(
-                coupons = null
+                coupon = null
             )
         }
 

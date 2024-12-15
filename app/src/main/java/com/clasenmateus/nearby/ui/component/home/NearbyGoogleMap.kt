@@ -1,4 +1,4 @@
-package com.clasenmateus.nearby.ui.component.home
+package com.rocketseat.nlw.nearby.ui.component.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.clasenmateus.nearby.R
+import com.clasenmateus.nearby.data.model.mockUserLocation
 import com.clasenmateus.nearby.ui.screen.home.HomeUiState
 import com.clasenmateus.nearby.ui.util.findNortheastPoint
 import com.clasenmateus.nearby.ui.util.findSouthwestPoint
@@ -27,90 +28,92 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
+import kotlin.collections.orEmpty
 import kotlin.math.roundToInt
 
-
-/**
- * Created by Mateus H. Clasen on 15/12/2024.
- */
 @Composable
 fun NearbyGoogleMap(modifier: Modifier = Modifier, uiState: HomeUiState) {
-
-    val mockUserLocation = LatLng(
-        -23.561187293883442,
-        -46.656451388116494
-    )
-
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current
-    val cameraPositionState = rememberCameraPositionState {
+
+    val cameraPositionState = rememberCameraPositionState() {
         position = CameraPosition.fromLatLngZoom(mockUserLocation, 13f)
     }
+
     val uiSettings by remember {
         mutableStateOf(MapUiSettings(zoomControlsEnabled = true))
     }
+
     GoogleMap(
         modifier = modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
         uiSettings = uiSettings
     ) {
-        context.getDrawable(R.drawable.ic_user_location)?.let { drawable ->
+        context.getDrawable(R.drawable.ic_user_location)?.let {
             Marker(
                 state = MarkerState(position = mockUserLocation),
                 icon = BitmapDescriptorFactory.fromBitmap(
-                    drawable.toBitmap(
+                    it.toBitmap(
                         width = density.run { 72.dp.toPx() }.roundToInt(),
                         height = density.run { 72.dp.toPx() }.roundToInt()
                     )
                 )
             )
         }
-    }
 
-    if (!uiState.markets.isNullOrEmpty()) {
-        context.getDrawable(R.drawable.img_pin)?.let { drawable ->
-            uiState.marketLocation?.toImmutableList()
-                ?.forEachIndexed { index, location ->
-                    Marker(
-                        state = MarkerState(position = location),
-                        icon = BitmapDescriptorFactory.fromBitmap(
-                            drawable.toBitmap(
-                                width = density.run { 36.dp.toPx() }.roundToInt(),
-                                height = density.run { 36.dp.toPx() }.roundToInt()
-                            )
-                        ),
-                        title = uiState.markets[index].name
-                    )
-                }.also {
-                    coroutineScope.launch {
-                        val allMarks = uiState.marketLocation?.plus(mockUserLocation)
-                        val southwestPoint =
-                            findSouthwestPoint(points = allMarks.orEmpty())
-                        val northeastPoint =
-                            findNortheastPoint(points = allMarks.orEmpty())
-
-                        val centerPointLatitude =
-                            (southwestPoint.latitude + northeastPoint.latitude) / 2
-                        val centerPointLongitude =
-                            (southwestPoint.longitude + northeastPoint.longitude) / 2
-
-                        val cameraUpdate =
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition(
-                                    LatLng(
-                                        centerPointLatitude,
-                                        centerPointLongitude,
-                                    ),
-                                    13f,
-                                    0f,
-                                    0f
+        if (!uiState.markets.isNullOrEmpty()) {
+            context.getDrawable(R.drawable.img_pin)?.let {
+                uiState.marketLocation?.toImmutableList()
+                    ?.forEachIndexed { index, location ->
+                        Marker(
+                            state = MarkerState(position = location),
+                            icon = BitmapDescriptorFactory.fromBitmap(
+                                it.toBitmap(
+                                    width = density.run { 36.dp.toPx() }
+                                        .roundToInt(),
+                                    height = density.run { 36.dp.toPx() }
+                                        .roundToInt()
                                 )
+                            ),
+                            title = uiState.markets[index].name
+                        )
+                    }.also {
+                        coroutineScope.launch {
+                            val allMarks = uiState.marketLocation?.plus(
+                                mockUserLocation
                             )
-                        delay(200)
-                        cameraPositionState.animate(cameraUpdate, durationMs = 500)
+
+                            val southwestPoint =
+                                findSouthwestPoint(points = allMarks.orEmpty())
+                            val northeastPoint =
+                                findNortheastPoint(points = allMarks.orEmpty())
+
+                            val centerPointLatitude =
+                                (southwestPoint.latitude + northeastPoint.latitude) / 2
+                            val centerPointLongitude =
+                                (southwestPoint.longitude + northeastPoint.longitude) / 2
+
+                            val cameraUpdate =
+                                CameraUpdateFactory.newCameraPosition(
+                                    CameraPosition(
+                                        LatLng(
+                                            centerPointLatitude,
+                                            centerPointLongitude
+                                        ),
+                                        13f,
+                                        0f,
+                                        0f
+                                    )
+                                )
+                            delay(200)
+                            cameraPositionState.animate(
+                                cameraUpdate,
+                                durationMs = 500
+                            )
+                        }
                     }
-                }
+            }
         }
     }
 }
